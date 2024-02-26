@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <meta property="og:type" content="website">
+    <meta property="og:url" content="http://luna-brew.com/">
+    <meta property="og:description" content="웹퍼블리셔취업을 위한 개인포트폴리오 사이트입니다">
+    <meta property="og:keywords" content="개인포트폴리오 웹디자인 웹퍼블리셔 개인홈페이지">
+    <meta property="og:title" content="lee's 개인홈페이지::예비웹퍼블리셔">
+    <meta name="description" content="웹퍼블리셔취업을 위한 개인포트폴리오 사이트입니다">
+    <meta name="keywords" content="개인포트폴리오 웹디자인 웹퍼블리셔 개인홈페이지">
+    <meta  name="og:image"  content="https://www.daleseo.com/html-meta/thumbnail.png" /> -->
+
+    <title>lee's 개인홈페이지::예비웹퍼블리셔</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+
+    <!-- 구글폰트:notosanskr -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"> 
+    
+    <link rel="stylesheet" href="css/common.css" type="text/css">
+    <link rel="stylesheet" href="css/header.css" type="text/css">
+    <link rel="stylesheet" href="css/title.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/footer.css" type="text/css">
+    <link rel="stylesheet" href="css/aside.css" type="text/css">
+    <link rel="stylesheet" href="css/responsive.css" type="text/css">
+    <link rel="stylesheet" href="cube.css">
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(
+            function(){
+                $("aside h2").click(
+                    function(){
+                        $("aside").toggleClass("asideShow");
+                        $(this).toggleClass("rot180");
+                    }
+                );
+
+                //대메뉴클릭시 페이지스크롤링 이동    
+                $("header ul.gnb li:nth-child(1) a").click(
+                    function(){
+                      $("html,body").animate({scrollTop:"0px"},1500); 
+                      return false; 
+                    }
+                );
+                //about
+                $("header ul.gnb li:nth-child(2) a").click(
+                    function(){
+                      $("html,body").animate({scrollTop:$(window).height()},1500); 
+                      return false; 
+                    }
+                );
+                // portfolio
+                $("header ul.gnb li:nth-child(3) a").click(
+                    function(){
+                      $("html,body").animate({scrollTop:$(window).height()*2},1500); 
+                      return false; 
+                    }
+                );
+                //contact
+                $("header ul.gnb li:nth-child(4) a").click(
+                    function(){
+                      $("html,body").animate({scrollTop:$(window).height()*3},1500); 
+                      return false; 
+                    }
+                );  
+                
+                // 클릭한 메뉴표시
+                // $("header ul.gnb li a").click(
+                //     function(){
+                //        $("header ul.gnb li a").addClass("gnbColor");
+                //        $("header ul.gnb li a").not(this).removeClass("currentGnb"); 
+                //        $(this).addClass("currentGnb"); 
+                //        return false;    
+                //     }
+                // );
+                //홈버튼 클릭시 원래 색상으로 표시
+                $("header ul.gnb li:nth-child(1) a").click(
+                    function(){
+                        $("header ul.gnb li a").removeClass();
+                    }
+                );
+
+                // 스크롤이벤트
+                $(window).scroll(function(){
+                        if($(window).scrollTop()>30){ //사이드메뉴보이게
+                            $("aside").addClass("asideShow");
+                        }
+                        //타이틀영역에서
+                        if($(window).scrollTop()<$("#title").height()){ 
+                          $("header ul.gnb li a").removeClass("gnbColor");
+                          $("header ul.gnb li a").removeClass("currentGnb");
+                          $("header h1 a").removeClass("gnbColor");
+                        }
+                        //-2 어바웃영역에서
+                        if($(window).scrollTop()>=$("#title").height()){ 
+                          $("header ul.gnb li a").addClass("gnbColor");
+                          $("aside").removeClass("asideShow");
+                          $("header ul.gnb li:nth-child(2) a").addClass("currentGnb"); 
+                          $("header ul.gnb li a").not("header ul.gnb li:nth-child(2) a").removeClass("currentGnb");
+                          // 로고칼라변경 
+                           $("header h1 a").addClass("gnbColor");
+                          
+                        }
+                        //-2 어바웃영역 제목애니
+                        if($(window).scrollTop()>=$("#title").height()/2){
+                          // 제목에 클래스지정(css애니메이션작동)
+                          $("#about .subject").addClass("current");
+                        }
+                        if( $(window).scrollTop() < $("#title").height()/2 ){
+                            $("#about .subject").removeClass("current");  
+                        }
+                        
+                        //-3 포트폴리오 진입시 대메뉴표시 변경(포트폴리오글자색변경)
+                        if($(window).scrollTop()>=$("#title").height()+$("#about").height()){
+                          $("header ul.gnb li:nth-child(3) a").addClass("currentGnb");
+                          $("header ul.gnb li a").not("header ul.gnb li:nth-child(3) a").removeClass("currentGnb");
+                          $("header h1 a").removeClass("gnbColor");
+                        }
+
+                        //-3 포트폴리오영역 제목애니
+                        if($(window).scrollTop()>=$("#title").height()+$("#about").height()/2){
+                           // 제목에 클래스지정(css애니메이션작동)
+                          $("#portfolio .subject").addClass("current");
+                        }
+                        if($(window).scrollTop() < $("#title").height()+$("#about").height()/2){
+                           // 제목에 클래스지정(css애니메이션작동)
+                          $("#portfolio .subject").removeClass("current");
+                        }
+
+                        //-4 contact진입시 대메뉴표시 / top버튼
+                        if($(window).scrollTop()>=$("#title").height()+$("#about").height()+$("#portfolio").height()){
+                          $("header ul.gnb li:nth-child(4) a").addClass("currentGnb"); 
+                          $("header ul.gnb li a").not("header ul.gnb li:nth-child(4) a").removeClass("currentGnb");
+                          $("a.top").fadeIn(500); 
+                          $("header h1 a").addClass("gnbColor");
+                        }
+                        //4 contact영역 제목애니
+                        if($(window).scrollTop()>=$("#title").height()+$("#about").height()+$("#portfolio").height()/2){
+                           // 제목에 클래스지정(css애니메이션작동)
+                          $("#contact .subject").addClass("current");
+                        }
+                        if($(window).scrollTop() < $("#title").height()+$("#about").height()+$("#portfolio").height()/2){
+                           // 제목에 클래스지정(css애니메이션작동)
+                          $("#contact .subject").removeClass("current");
+                        }
+
+                        if($(window).scrollTop()<$("#title").height()+$("#about").height()+$("#portfolio").height()){
+                          $("a.top").fadeOut(500); 
+                        }
+
+                        // 로고칼라변경
+
+                        
+                });
+
+                //위로가기 버튼
+                $("a.top").hide();
+                $("a.top").click(function(){
+                    $("html,body").animate({scrollTop:"0px"},1500);
+                    return false;
+                });
+               
+            }
+        );
+    </script>
+</head>
+<body>
+    <!-- 상단영역 -->
+    <header>
+        <div class="wrap">
+            <h1 class="h1"><a href="#">이선's PORTFOLIO</a></h1>
+            <ul class="gnb">
+                <li><a href="">HOME</a></li>
+                <li><a href="">ABOUT</a></li>
+                <li><a href="">PORTFOLIO</a></li>
+                <li><a href="">CONTACT</a></li>
+            </ul>
+            <a class="allmenu" href="">전체메뉴보기<span class="nemo"></span></a>
+        </div>
+    </header>
+    <!-- 타이틀영역 -->
+    <div id="title">
+        <div class="wrap">
+            <div class="scene">
+                <div class="cube">
+                  <div class="face face-front">HTML</div>
+                  <div class="face face-back">CSS</div>
+                  <div class="face face-top">JAVASCRIPT</div>
+                  <div class="face face-right">JQUERY</div>
+                  <div class="face face-bottom">웹표준</div>
+                  <div class="face face-left">반응형</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 내용영역 -->
+    <main>
+        <section id="about">
+            <div class="wrap">
+                <h2 class="h2 subject">ABOUT</h2>
+            </div>
+        </section>
+        <section id="portfolio">
+            <div class="wrap">
+                <h2 class="h2 subject">portfolio</h2>
+                <ul class="list">
+                    <li>
+                        <h3 class="h3">한진칼 코딩</h3>
+                        <p>한진칼 코딩작업물입니다</p>
+                        <a href="pf1/index.html" target="_blink">작업물보기</a>
+                    </li>
+                    <li>
+                        <h3 class="h3">개별코딩2</h3>
+                        <p> 개별 코딩작업물입니다</p>
+                        <a href="pf2/index.html" target="_blink">작업물보기</a>
+                    </li>
+                    <li>
+                        <h3 class="h3">투썸플레이스 코딩</h3>
+                        <p>투썸 코딩작업물입니다</p>
+                        <a href="pf3/index.html" target="_blink">작업물보기</a>
+                    </li>
+                    <li>
+                        <h3 class="h3">코딩작품4</h3>
+                        <p>준비중</p>
+                        <a href="">작업물보기</a>
+                    </li>
+                    <li>
+                        <h3 class="h3">삼성전자 회사홈페이지</h3>
+                        <p>준비중</p>
+                        <a href="pf5/index.html"  target="_blink">작업물보기</a>
+                    </li>
+                    <li>
+                        <h3 class="h3">코딩작품4</h3>
+                        <p>준비중</p>
+                        <a href="">작업물보기</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="wrap">
+                <h2 class="h2 subject">CONTACT</h2>
+            </div>
+        </section>
+    </main>
+    <aside>
+        <h2>사이드메뉴</h2>
+        <h3>연락하기</h3>
+        <ul>
+            <li>카카오톡대화하기</li>
+            <li>전화걸기</li>
+            <li>이메일보내기</li>
+        </ul>
+        
+    </aside>
+    <!-- 하단영역 -->
+    <footer>
+        <h1>이선's PORTFOLIO</h1>
+        <address>경기도 안양시 안양동</address>
+        <p>ALL RIGHTS REVERSED</p>
+        <a href="" class="top">위로 가기</a>
+    </footer>  
+</body>
+</html>
